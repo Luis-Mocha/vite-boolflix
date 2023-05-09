@@ -10,15 +10,46 @@ export default {
         }
     },
     methods: {
+
         apiSearchMovies() {
             if (store.searchValue !== '') {
                 axios.get( `https://api.themoviedb.org/3/search/movie?${store.ApiPath}&query=${store.searchValue}&language=it_IT`)
-                .then( (res) => {
-                console.log(res.data.results) 
+                    .then( (res) => {
+                    console.log(res.data.results) 
+                    
+                    const infoMovies = res.data.results;
+                    store.arrayMovies = infoMovies;
+
+
+                    store.arrayMovies.forEach(element => {
+                    // modifico i codici lingua non riconosciuti dall'api per le bandiere
+                        if (element.original_language === 'en') {
+                            element.original_language = 'gb'
+                        }
+                        else if (element.original_language === 'ko') {
+                            element.original_language = 'kr'
+                        }
+                        else if (element.original_language === 'da') {
+                            element.original_language = 'dk'
+                        }
+                        else if (element.original_language === 'ja') {
+                            element.original_language = 'jp'
+                        };
+
+                        // moddifico le date
+                        const newFormat = element.release_date.split('-');
+                        element.release_date = `${newFormat[2]}-${newFormat[1]}-${newFormat[0]}`;
+
+                        //Modifico i voti
+                        const newVote = Math.ceil((element.vote_average  * 5 / 10));
+                        element.vote_average = newVote;
+                    })
+
+                });
+
                 
-                const infoMovies = res.data.results;
-                store.arrayMovies = infoMovies;
-            }) 
+                
+            
             }
             else {
                 console.log('Non hai scritto niente');

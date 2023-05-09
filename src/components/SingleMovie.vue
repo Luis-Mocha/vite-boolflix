@@ -53,9 +53,11 @@ export default {
             <!-- lingua -->
             <div v-if="infoControl === true">
                 <span>Lingua Originale:</span>
-                <span class="ms-2">
+                <!-- <span class="ms-2">
                     {{infoMovies.original_language}}
-                </span>
+                </span> -->
+                <img :src="`https://flagcdn.com/24x18/${infoMovies.original_language}.webp`" alt="Icona lingua originale" class="d-block">
+                <!-- https://flagcdn.com/24x18/it.webp -->
             </div>
 
             <!-- data -->
