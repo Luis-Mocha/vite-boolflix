@@ -1,7 +1,7 @@
 <script>
 
     export default {
-        name: 'HeaderComp',
+        name: 'AppMain',
     }
     
 </script>
@@ -9,11 +9,10 @@
 
 <template>
 
-    <h2>HeaderComp</h2>
+    <h2>AppMain</h2>
 
 </template>
 
 <style lang="scss" scoped>
 
 </style>
-
