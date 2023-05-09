@@ -58,6 +58,14 @@ export default {
                 </span>
             </div>
 
+            <!-- data -->
+            <div v-if="infoControl === true">
+                <span>Data Uscita</span>
+                <div class="ms-2">
+                    {{infoMovies.release_date}}
+                </div>
+            </div>
+
             <!-- voto -->
             <div v-if="infoControl === true">
                 <span>Voto:</span>
