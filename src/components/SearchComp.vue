@@ -11,29 +11,18 @@ export default {
     },
     methods: {        
 
-        apiSearchMovies(searchPar) {
+        apiSearchMovies() {
             let infoMovies;
             if (store.searchValue !== '') {
-                axios.get( `https://api.themoviedb.org/3/search/${searchPar}?${store.ApiPath}&query=${store.searchValue}&language=it_IT`)
+                axios.get( `https://api.themoviedb.org/3/search/movie?${store.ApiPath}&query=${store.searchValue}&language=it_IT`)
                     .then( (res) => {
                     console.log(res.data.results) 
                     
                     infoMovies = res.data.results;
 
                     infoMovies.forEach(element => {
-                    // modifico i codici lingua non riconosciuti dall'api per le bandiere
-                        if (element.original_language === 'en') {
-                            element.original_language = 'gb'
-                        }
-                        else if (element.original_language === 'ko') {
-                            element.original_language = 'kr'
-                        }
-                        else if (element.original_language === 'da') {
-                            element.original_language = 'dk'
-                        }
-                        else if (element.original_language === 'ja') {
-                            element.original_language = 'jp'
-                        };
+                        // modifico i codici lingua non riconosciuti dall'api per le bandiere
+                        this.changeDate(element)
 
                         // moddifico le date
                         const newFormat = element.release_date.split('-');
@@ -53,29 +42,18 @@ export default {
             };
         },
 
-        apiSearchTv(searchPar) {
+        apiSearchTv() {
             let infoMovies;
             if (store.searchValue !== '') {
-                axios.get( `https://api.themoviedb.org/3/search/${searchPar}?${store.ApiPath}&query=${store.searchValue}&language=it_IT`)
+                axios.get( `https://api.themoviedb.org/3/search/tv?${store.ApiPath}&query=${store.searchValue}&language=it_IT`)
                     .then( (res) => {
                     console.log(res.data.results) 
                     
                     infoMovies = res.data.results;
 
                     infoMovies.forEach(element => {
-                    // modifico i codici lingua non riconosciuti dall'api per le bandiere
-                        if (element.original_language === 'en') {
-                            element.original_language = 'gb'
-                        }
-                        else if (element.original_language === 'ko') {
-                            element.original_language = 'kr'
-                        }
-                        else if (element.original_language === 'da') {
-                            element.original_language = 'dk'
-                        }
-                        else if (element.original_language === 'ja') {
-                            element.original_language = 'jp'
-                        };
+                        // modifico i codici lingua non riconosciuti dall'api per le bandiere
+                        this.changeDate(element)
 
                         // moddifico le date
                         const newFormat = element.first_air_date.split('-');
@@ -94,7 +72,25 @@ export default {
                 console.log('Non hai scritto niente');
             };
         },
-    }
+
+        changeDate(par) {
+            // modifico i codici lingua non riconosciuti dall'api per le bandiere
+            if (par.original_language === 'en') {
+                par.original_language = 'gb'
+            }
+            else if (par.original_language === 'ko') {
+                par.original_language = 'kr'
+            }
+            else if (par.original_language === 'da') {
+                par.original_language = 'dk'
+            }
+            else if (par.original_language === 'ja') {
+                par.original_language = 'jp'
+            };
+        
+        },
+
+    } //fine methods
 }
     
 </script>
@@ -105,10 +101,10 @@ export default {
     <div class="d-flex align-items-center">
 
         <div class="input-gruppo">
-            <span class="input-icon" id="basic-addon1" @click="apiSearchMovies(store.apiMoviePath) ; apiSearchTv(store.apiTvPath) ">
+            <span class="input-icon" id="basic-addon1" @click="apiSearchMovies() ; apiSearchTv() ">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </span>
-            <input type="search" class="search-input" placeholder="Cerca un titolo..." aria-label="Titoli" aria-describedby="basic-addon1" name="search-input" v-model="store.searchValue" @keyup.enter="apiSearchMovies(store.apiMoviePath , store.arrayMovies)">
+            <input type="search" class="search-input" placeholder="Cerca un titolo..." aria-label="Titoli" aria-describedby="basic-addon1" name="search-input" v-model="store.searchValue" @keyup.enter="apiSearchMovies() ; apiSearchTv()">
         </div>
 
     </div>
