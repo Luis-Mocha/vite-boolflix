@@ -101,10 +101,10 @@ export default {
     <div class="d-flex align-items-center">
 
         <div class="input-gruppo">
-            <span class="input-icon" id="basic-addon1" @click="apiSearchMovies() ; apiSearchTv() ">
+            <span class="input-icon" id="basic-addon1" @click="apiSearchMovies() ; apiSearchTv()">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </span>
-            <input type="search" class="search-input" placeholder="Cerca un titolo..." aria-label="Titoli" aria-describedby="basic-addon1" name="search-input" v-model="store.searchValue" @keyup.enter="apiSearchMovies() ; apiSearchTv()">
+            <input type="search" class="search-input" placeholder="Cerca un titolo..." aria-label="Titoli" aria-describedby="basic-addon1" name="search-input" v-model="store.searchValue" @keyup.enter="apiSearchMovies() ; apiSearchTv()" @keyup="apiSearchMovies() ; apiSearchTv()">
         </div>
 
     </div>
