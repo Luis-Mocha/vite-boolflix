@@ -6,5 +6,6 @@ export const store = reactive (
         ApiPath: 'api_key=bc7d20a9b1d3b7eb9ee45c24dfaae7bb',
 
         searchValue: '',
+        arrayMovies: [],
     }
 )

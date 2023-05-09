@@ -1,5 +1,6 @@
 <script>
-
+import axios from 'axios';
+import {store} from './store';
 import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
 
@@ -9,6 +10,29 @@ export default {
     AppHeader,
     AppMain,
   },
+
+  data() {
+    return {
+      store
+    }
+  },
+
+  created() {
+  },
+  
+  computed: {
+  },
+  methods: {
+    apiSearchMovies() {
+      axios.get( `https://api.themoviedb.org/3/search/movie?${store.ApiPath}&query=${store.searchValue}`)
+        .then( (res) => {
+          console.log(res.data) 
+        
+          const infoMovies = res.data;
+          store.arrayMovies = infoMovies;
+      })
+    },
+  }
 }
 
 </script>
