@@ -1,0 +1,54 @@
+<script>
+
+    import { store } from '../store';
+
+    export default {
+        name: 'SearchComp',
+        data() {
+            return {
+                store
+            }
+        },
+    }
+    
+</script>
+
+
+<template>
+
+    <div class="d-flex align-items-center">
+
+        <div class="input-gruppo">
+            <span class="input-icon" id="basic-addon1">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <input type="search" class="search-input" placeholder="Cerca un titolo..." aria-label="Titoli" aria-describedby="basic-addon1" name="search-input" v-model="store.searchValue">
+        </div>
+
+        
+    </div>
+
+</template>
+
+<style lang="scss" scoped>
+
+    .input-gruppo {
+        // width: min-content;
+        display: flex;
+        border: 1px solid white;
+        .input-icon {
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            cursor: pointer;
+        }
+        .search-input {
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            background-color: transparent;
+            outline: none;
+        }
+    }
+
+</style>

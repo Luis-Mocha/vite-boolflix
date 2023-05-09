@@ -16,9 +16,9 @@
 
     <header>
         <div class="contenitore-90 h-100 d-flex">
-            <div id="headerLogo" class="h-100">
+            <!-- <div id="headerLogo" class="h-100"> -->
                 <img src="https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg" alt="Logo Netflix" class="h-100 py-4">
-            </div>
+            <!-- </div> -->
 
             <nav id="headerNav">
                 <ul>
