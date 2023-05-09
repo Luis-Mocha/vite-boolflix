@@ -1,9 +1,10 @@
 <script>
+import { defineComponent } from 'vue';
 
 
 export default {
-    name: "SingleMovie",
-    props: ["infoMovies", "infoIndex"],
+    name: "SingleTv",
+    props: ["infoTv"],
     data() {
         return {
             infoControl: false,
@@ -27,25 +28,26 @@ export default {
 
 
 <template>
+    
     <div class="movie-card col-6 col-md-4 col-lg-2" @mouseover="infoControl = true" @mouseleave="infoControl = false">
 
         <div class="card-img" v-if="infoControl === false">
-            <img :src=" `https://image.tmdb.org/t/p/w500/${infoMovies.poster_path}` " :alt="infoMovies.title">
+            <img :src=" `https://image.tmdb.org/t/p/w500/${infoTv.poster_path}` " :alt="infoTv.title">
         </div>
-        
+
 
         <div class="card-info" :class="(infoControl === true) ? 'open' : '' ">
 
             <!-- titolo -->
             <h3 class="text-center">
-                {{infoMovies.title}}
+                {{infoTv.title}}
             </h3>
 
             <!-- titolo originale -->
-            <div v-if="infoControl === true && infoMovies.title != infoMovies.original_title " >
+            <div v-if="infoControl === true && infoTv.title != infoTv.original_title " >
                 <span>Titolo originale:</span>
                 <div class="ms-2">
-                    {{infoMovies.original_title}}
+                    {{infoTv.original_title}}
                 </div>
             </div>
 
@@ -53,25 +55,25 @@ export default {
             <div v-if="infoControl === true">
                 <span>Lingua Originale:</span>
                 <!-- <span class="ms-2">
-                    {{infoMovies.original_language}}
+                    {{infoTv.original_language}}
                 </span> -->
-                <img :src="`https://flagcdn.com/24x18/${infoMovies.original_language}.webp`" alt="Icona lingua originale" class="d-block mx-auto">
+                <img :src="`https://flagcdn.com/24x18/${infoTv.original_language}.webp`" alt="Icona lingua originale" class="d-block mx-auto">
             </div>
 
             <!-- data -->
             <div v-if="infoControl === true">
                 <span>Data Uscita</span>
                 <div class="ms-2">
-                    {{infoMovies.release_date}}
+                    {{infoTv.first_air_date}}
                 </div>
             </div>
 
             <!-- voto -->
             <div v-if="infoControl === true">
                 <span>Voto:</span>
-                <span>({{infoMovies.vote_average}})</span>
+                <span>({{infoTv.vote_average}})</span>
                 <br>
-                <i class="fa-solid fa-star" style="color: #ffd22e;" v-for="n in infoMovies.vote_average"></i>
+                <i class="fa-solid fa-star" style="color: #ffd22e;" v-for="n in infoTv.vote_average"></i>
             </div>
 
             
@@ -82,12 +84,13 @@ export default {
             <i class="fa-solid fa-chevron-down" v-else></i>
         </button>
 
-    </div>
+</div>
+
 </template>
 
 <style lang="scss" scoped>
     .movie-card {
-        // border: 1px solid white;
+        //border: 1px solid white;
         padding: 0 20px;
         height: 100%;
         cursor: pointer;

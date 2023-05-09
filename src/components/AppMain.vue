@@ -1,11 +1,13 @@
 <script>
 import { store } from '../store';
 import MoviesComp from './MoviesComp.vue';
+import TvComp from './TvComp.vue';
 
 export default {
     name: 'AppMain',
     components: {
         MoviesComp,
+        TvComp,
     },
     data() {
         return {
@@ -22,6 +24,8 @@ export default {
     <main class="border">
         
         <MoviesComp/>
+
+        <TvComp/>
 
     </main>
     
