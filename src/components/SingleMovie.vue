@@ -56,8 +56,7 @@ export default {
                 <!-- <span class="ms-2">
                     {{infoMovies.original_language}}
                 </span> -->
-                <img :src="`https://flagcdn.com/24x18/${infoMovies.original_language}.webp`" alt="Icona lingua originale" class="d-block">
-                <!-- https://flagcdn.com/24x18/it.webp -->
+                <img :src="`https://flagcdn.com/24x18/${infoMovies.original_language}.webp`" alt="Icona lingua originale" class="d-block mx-auto">
             </div>
 
             <!-- data -->
@@ -71,9 +70,9 @@ export default {
             <!-- voto -->
             <div v-if="infoControl === true">
                 <span>Voto:</span>
-                <div>
-                    {{infoMovies.vote_average}}
-                </div>
+                <span>({{infoMovies.vote_average}})</span>
+                <br>
+                <i class="fa-solid fa-star" style="color: #ffd22e;" v-for="n in infoMovies.vote_average"></i>
             </div>
 
             

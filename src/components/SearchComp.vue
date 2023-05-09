@@ -46,10 +46,7 @@ export default {
                     })
 
                 });
-
-                
-                
-            
+                            
             }
             else {
                 console.log('Non hai scritto niente');
