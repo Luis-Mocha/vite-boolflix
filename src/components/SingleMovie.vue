@@ -22,7 +22,6 @@ export default {
             }
         },
     },
-    components: { defineComponent }
 }
     
 </script>
@@ -44,7 +43,7 @@ export default {
             </h3>
 
             <!-- titolo originale -->
-            <div v-if="infoControl === true" >
+            <div v-if="infoControl === true && infoMovies.title != infoMovies.original_title " >
                 <span>Titolo originale:</span>
                 <div class="ms-2">
                     {{infoMovies.original_title}}
@@ -53,7 +52,7 @@ export default {
 
             <!-- lingua -->
             <div v-if="infoControl === true">
-                <span>Titolo originale:</span>
+                <span>Lingua Originale:</span>
                 <span class="ms-2">
                     {{infoMovies.original_language}}
                 </span>
@@ -133,6 +132,7 @@ export default {
         //quando le info sono aperte
         .card-info.open {
             height: 90%;
+            border: 1px solid red;
         }
 
     }
