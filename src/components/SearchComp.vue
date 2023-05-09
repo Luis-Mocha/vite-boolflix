@@ -12,11 +12,11 @@ export default {
     methods: {
         apiSearchMovies() {
             if (store.searchValue !== '') {
-                axios.get( `https://api.themoviedb.org/3/search/movie?${store.ApiPath}&query=${store.searchValue}`)
+                axios.get( `https://api.themoviedb.org/3/search/movie?${store.ApiPath}&query=${store.searchValue}&language=it_IT`)
                 .then( (res) => {
-                console.log(res.data) 
+                console.log(res.data.results) 
                 
-                const infoMovies = res.data;
+                const infoMovies = res.data.results;
                 store.arrayMovies = infoMovies;
             }) 
             }
