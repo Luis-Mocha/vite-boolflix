@@ -23,15 +23,7 @@ export default {
   computed: {
   },
   methods: {
-    apiSearchMovies() {
-      axios.get( `https://api.themoviedb.org/3/search/movie?${store.ApiPath}&query=${store.searchValue}`)
-        .then( (res) => {
-          console.log(res.data) 
-        
-          const infoMovies = res.data;
-          store.arrayMovies = infoMovies;
-      })
-    },
+  
   }
 }
 

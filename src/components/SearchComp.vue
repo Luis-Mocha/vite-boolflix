@@ -1,26 +1,31 @@
 <script>
-    import axios from 'axios';
-    import { store } from '../store';
+import axios from 'axios';
+import { store } from '../store';
 
-    export default {
-        name: 'SearchComp',
-        data() {
-            return {
-                store
-            }
-        },
-        methods: {
-            apiSearchMovies() {
-            axios.get( `https://api.themoviedb.org/3/search/movie?${store.ApiPath}&query=${store.searchValue}`)
+export default {
+    name: 'SearchComp',
+    data() {
+        return {
+            store
+        }
+    },
+    methods: {
+        apiSearchMovies() {
+            if (store.searchValue !== '') {
+                axios.get( `https://api.themoviedb.org/3/search/movie?${store.ApiPath}&query=${store.searchValue}`)
                 .then( (res) => {
                 console.log(res.data) 
                 
                 const infoMovies = res.data;
                 store.arrayMovies = infoMovies;
-            })
-            },
-        }
+            }) 
+            }
+            else {
+                console.log('Non hai scritto niente');
+            }
+        },
     }
+}
     
 </script>
 
