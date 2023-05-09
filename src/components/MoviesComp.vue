@@ -41,7 +41,7 @@ export default {
 @import "../style/main.scss";
 
     #movieSection {
-        border: 1px solid red;
+        // border: 1px solid red;
         color: white;
 
         h2 {
@@ -50,7 +50,7 @@ export default {
             margin-bottom: 10px;
         }
         .slider {
-            border: 1px solid yellow;
+            // border: 1px solid yellow;
             display: flex;        
             height: 500px;
             overflow: auto;
