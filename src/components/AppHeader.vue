@@ -1,8 +1,8 @@
 <script>
 
-    import SearchComp from './SearchComp.vue';
+import SearchComp from './SearchComp.vue';
 
-    export default {
+export default {
     name: "AppHeader",
     components: {
         SearchComp,

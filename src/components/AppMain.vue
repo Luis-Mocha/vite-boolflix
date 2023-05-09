@@ -1,15 +1,18 @@
 <script>
+import { store } from '../store';
+import MoviesComp from './MoviesComp.vue';
 
-    import { store } from '../store';
-
-    export default {
-        name: 'AppMain',
-        data() {
-            return {
-                store
-            }
-        },
-    }
+export default {
+    name: 'AppMain',
+    components: {
+        MoviesComp,
+    },
+    data() {
+        return {
+            store
+        }
+    },
+}
     
 </script>
 
@@ -17,7 +20,9 @@
 <template>
 
     <main class="border">
-        <h2>AppMain</h2>
+        
+        <MoviesComp/>
+
     </main>
     
 </template>
