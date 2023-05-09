@@ -43,6 +43,7 @@ export default {
     #movieSection {
         // border: 1px solid red;
         color: white;
+        margin-bottom: 50px;
 
         h2 {
             text-transform: uppercase;

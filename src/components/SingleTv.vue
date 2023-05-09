@@ -32,7 +32,7 @@ export default {
     <div class="movie-card col-6 col-md-4 col-lg-2" @mouseover="infoControl = true" @mouseleave="infoControl = false">
 
         <div class="card-img" v-if="infoControl === false">
-            <img :src=" `https://image.tmdb.org/t/p/w500/${infoTv.poster_path}` " :alt="infoTv.title">
+            <img :src=" `https://image.tmdb.org/t/p/w500/${infoTv.poster_path}`" :alt="infoTv.title">
         </div>
 
 
@@ -40,23 +40,20 @@ export default {
 
             <!-- titolo -->
             <h3 class="text-center">
-                {{infoTv.title}}
+                {{infoTv.name}}
             </h3>
 
             <!-- titolo originale -->
-            <div v-if="infoControl === true && infoTv.title != infoTv.original_title " >
+            <div v-if="infoControl === true && infoTv.name != infoTv.original_name " >
                 <span>Titolo originale:</span>
                 <div class="ms-2">
-                    {{infoTv.original_title}}
+                    {{infoTv.original_name}}
                 </div>
             </div>
 
             <!-- lingua -->
             <div v-if="infoControl === true">
                 <span>Lingua Originale:</span>
-                <!-- <span class="ms-2">
-                    {{infoTv.original_language}}
-                </span> -->
                 <img :src="`https://flagcdn.com/24x18/${infoTv.original_language}.webp`" alt="Icona lingua originale" class="d-block mx-auto">
             </div>
 

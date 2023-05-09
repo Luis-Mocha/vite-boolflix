@@ -21,7 +21,7 @@ export default {
 
 <template>
 
-    <main class="border">
+    <main>
         
         <MoviesComp/>
 
