@@ -9,19 +9,18 @@ export default {
             store
         }
     },
-    methods: {
+    methods: {        
 
-        apiSearchMovies() {
+        apiSearchMovies(searchPar) {
+            let infoMovies;
             if (store.searchValue !== '') {
-                axios.get( `https://api.themoviedb.org/3/search/movie?${store.ApiPath}&query=${store.searchValue}&language=it_IT`)
+                axios.get( `https://api.themoviedb.org/3/search/${searchPar}?${store.ApiPath}&query=${store.searchValue}&language=it_IT`)
                     .then( (res) => {
                     console.log(res.data.results) 
                     
-                    const infoMovies = res.data.results;
-                    store.arrayMovies = infoMovies;
+                    infoMovies = res.data.results;
 
-
-                    store.arrayMovies.forEach(element => {
+                    infoMovies.forEach(element => {
                     // modifico i codici lingua non riconosciuti dall'api per le bandiere
                         if (element.original_language === 'en') {
                             element.original_language = 'gb'
@@ -43,14 +42,57 @@ export default {
                         //Modifico i voti
                         const newVote = Math.ceil((element.vote_average  * 5 / 10));
                         element.vote_average = newVote;
-                    })
 
+                    })
+                    store.arrayMovies = infoMovies;
                 });
-                            
+
             }
             else {
                 console.log('Non hai scritto niente');
+            };
+        },
+
+        apiSearchTv(searchPar) {
+            let infoMovies;
+            if (store.searchValue !== '') {
+                axios.get( `https://api.themoviedb.org/3/search/${searchPar}?${store.ApiPath}&query=${store.searchValue}&language=it_IT`)
+                    .then( (res) => {
+                    console.log(res.data.results) 
+                    
+                    infoMovies = res.data.results;
+
+                    infoMovies.forEach(element => {
+                    // modifico i codici lingua non riconosciuti dall'api per le bandiere
+                        if (element.original_language === 'en') {
+                            element.original_language = 'gb'
+                        }
+                        else if (element.original_language === 'ko') {
+                            element.original_language = 'kr'
+                        }
+                        else if (element.original_language === 'da') {
+                            element.original_language = 'dk'
+                        }
+                        else if (element.original_language === 'ja') {
+                            element.original_language = 'jp'
+                        };
+
+                        // moddifico le date
+                        const newFormat = element.first_air_date.split('-');
+                        element.first_air_date = `${newFormat[2]}-${newFormat[1]}-${newFormat[0]}`;
+
+                        //Modifico i voti
+                        const newVote = Math.ceil((element.vote_average  * 5 / 10));
+                        element.vote_average = newVote;
+
+                    })
+                    store.arrayTv = infoMovies;
+                });
+
             }
+            else {
+                console.log('Non hai scritto niente');
+            };
         },
     }
 }
@@ -63,13 +105,12 @@ export default {
     <div class="d-flex align-items-center">
 
         <div class="input-gruppo">
-            <span class="input-icon" id="basic-addon1" @click="apiSearchMovies()">
+            <span class="input-icon" id="basic-addon1" @click="apiSearchMovies(store.apiMoviePath) ; apiSearchTv(store.apiTvPath) ">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </span>
-            <input type="search" class="search-input" placeholder="Cerca un titolo..." aria-label="Titoli" aria-describedby="basic-addon1" name="search-input" v-model="store.searchValue" @keyup.enter="apiSearchMovies()">
+            <input type="search" class="search-input" placeholder="Cerca un titolo..." aria-label="Titoli" aria-describedby="basic-addon1" name="search-input" v-model="store.searchValue" @keyup.enter="apiSearchMovies(store.apiMoviePath , store.arrayMovies)">
         </div>
 
-        
     </div>
 
 </template>
