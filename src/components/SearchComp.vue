@@ -40,6 +40,7 @@ export default {
             }
             else {
                 console.log('Non hai scritto niente');
+                store.arrayMovies = []
             };
         },
 
@@ -71,6 +72,7 @@ export default {
             }
             else {
                 console.log('Non hai scritto niente');
+                store.arrayTv = []
             };
         },
 
