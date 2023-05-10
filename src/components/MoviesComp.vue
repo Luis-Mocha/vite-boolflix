@@ -22,7 +22,7 @@ export default {
 
 <template>
 
-    <div id="movieSection">
+    <div id="movieSection" class="main-section">
         <h2>
             Movies
         </h2>
@@ -39,23 +39,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "../style/main.scss";
-
-    #movieSection {
-        // border: 1px solid red;
-        color: white;
-        margin-bottom: 50px;
-
-        h2 {
-            text-transform: uppercase;
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-        .slider {
-            // border: 1px solid yellow;
-            display: flex;        
-            height: 500px;
-            overflow: auto;
-        }
-    }      
+     
 
 </style>

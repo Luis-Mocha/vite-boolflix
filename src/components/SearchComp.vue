@@ -15,6 +15,7 @@ export default {
             let infoMovies;
             if (store.searchValue !== '') {
                 axios.get( `https://api.themoviedb.org/3/search/movie?${store.ApiPath}&query=${store.searchValue}&language=it_IT`)
+                // axios.get( `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&${store.ApiPath}`)
                     .then( (res) => {
                     console.log(res.data.results) 
                     

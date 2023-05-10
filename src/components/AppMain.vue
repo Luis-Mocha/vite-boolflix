@@ -23,9 +23,9 @@ export default {
 
     <main>
         
-        <MoviesComp/>
+        <MoviesComp v-if="store.arrayMovies != '' "/>
 
-        <TvComp/>
+        <TvComp v-if="store.arrayTv != '' "/>
 
     </main>
     
