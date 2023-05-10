@@ -67,6 +67,7 @@ export default {
         height: 100px;
         background-color: black;
         color: white;
+        overflow: hidden;
 
         nav{
             width: 100%;

@@ -32,7 +32,7 @@ export default {
     <div class="my-card col-6 col-md-4 col-lg-2" @mouseover="infoControl = true" @mouseleave="infoControl = false">
 
         <div class="card-img" v-if="infoControl === false">
-            <img :src=" `https://image.tmdb.org/t/p/w500/${infoTv.poster_path}`" :alt="infoTv.title">
+            <img :src=" `https://image.tmdb.org/t/p/w342/${infoTv.poster_path}`" :alt="infoTv.title">
         </div>
 
 
