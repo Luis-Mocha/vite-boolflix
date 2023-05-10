@@ -17,11 +17,11 @@ export default {
                 axios.get( `https://api.themoviedb.org/3/search/movie?${store.ApiPath}&query=${store.searchValue}&language=it_IT`)
                 // axios.get( `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&${store.ApiPath}`)
                     .then( (res) => {
-                    console.log(res.data.results) 
+                    console.log(res.data) 
                     
-                    infoMovies = res.data.results;
+                    infoMovies = res.data;
 
-                    infoMovies.forEach(element => {
+                    infoMovies.results.forEach(element => {
                         // modifico i codici lingua non riconosciuti dall'api per le bandiere
                         this.changeFlag(element)
 
