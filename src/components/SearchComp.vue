@@ -23,7 +23,7 @@ export default {
 
                     infoMovies.forEach(element => {
                         // modifico i codici lingua non riconosciuti dall'api per le bandiere
-                        this.changeDate(element)
+                        this.changeFlag(element)
 
                         // moddifico le date
                         const newFormat = element.release_date.split('-');
@@ -54,7 +54,7 @@ export default {
 
                     infoMovies.forEach(element => {
                         // modifico i codici lingua non riconosciuti dall'api per le bandiere
-                        this.changeDate(element)
+                        this.changeFlag(element)
 
                         // moddifico le date
                         const newFormat = element.first_air_date.split('-');
@@ -74,8 +74,8 @@ export default {
             };
         },
 
-        changeDate(par) {
-            // modifico i codici lingua non riconosciuti dall'api per le bandiere
+        // modifico i codici lingua non riconosciuti dall'api per le bandiere
+        changeFlag(par) {
             if (par.original_language === 'en') {
                 par.original_language = 'gb'
             }
@@ -88,7 +88,6 @@ export default {
             else if (par.original_language === 'ja') {
                 par.original_language = 'jp'
             };
-        
         },
 
     } //fine methods

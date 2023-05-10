@@ -29,7 +29,7 @@ export default {
 
 <template>
     
-    <div class="movie-card col-6 col-md-4 col-lg-2" @mouseover="infoControl = true" @mouseleave="infoControl = false">
+    <div class="my-card col-6 col-md-4 col-lg-2" @mouseover="infoControl = true" @mouseleave="infoControl = false">
 
         <div class="card-img" v-if="infoControl === false">
             <img :src=" `https://image.tmdb.org/t/p/w500/${infoTv.poster_path}`" :alt="infoTv.title">
@@ -86,63 +86,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-    .movie-card {
-        //border: 1px solid white;
-        padding: 0 20px;
-        height: 100%;
-        cursor: pointer;
-        
-        display: flex;
-        flex-direction: column;
 
-        .card-img {
-            height: 70%;
-            display: flex;
-            justify-content: center;
-
-            img {
-                height: 100%;
-                display: block;
-                cursor: pointer;
-            }
-        }
-
-        .card-info {
-            padding-top: 10px;
-            height: 20%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-evenly;
-            color: white;
-            
-            h3 {
-                overflow: hidden;
-            }
-
-            div {
-                text-align: center;
-            }
-
-        }
-
-        button {
-            height: 10%;
-            color: white;
-            background-color: black;
-            border: none;
-            font-size: 22px;
-            &:hover {
-                color: red;
-            }
-        }
-
-        //quando le info sono aperte
-        .card-info.open {
-            height: 90%;
-            border: 1px solid red;
-        }
-
-    }
+@import "../style/main.scss";
 
 </style>

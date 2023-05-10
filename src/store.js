@@ -8,5 +8,7 @@ export const store = reactive (
         searchValue: '',
         arrayMovies: [],
         arrayTv: [],
+        arrayPopularMovies: [],
+        arrayPopularTv: [],
     }
 )

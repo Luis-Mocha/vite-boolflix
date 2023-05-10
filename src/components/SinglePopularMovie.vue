@@ -1,8 +1,8 @@
 <script>
 
 export default {
-    name: "SingleMovie",
-    props: ["infoMovies", "infoIndex"],
+    name: "SinglePopularMovie",
+    props: ["infoMovies"],
     data() {
         return {
             infoControl: false,
@@ -78,7 +78,7 @@ export default {
 
         <button @click="openCloseInfo()">
             <i class="fa-solid fa-chevron-up" v-if="infoControl === false"></i>
-            <i class="fa-solid fa-chevron-down" v-else></i>
+            <i class="fa-solid fa-chevron-down" style="color: red;" v-else></i>
         </button>
 
     </div>
