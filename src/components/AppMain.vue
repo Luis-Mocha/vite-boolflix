@@ -4,6 +4,7 @@ import { store } from '../store';
 import MoviesComp from './MoviesComp.vue';
 import TvComp from './TvComp.vue';
 import PopularMovies from './PopularMovies.vue';
+import PopularTv from './PopularTv.vue';
 
 export default {
     name: 'AppMain',
@@ -11,6 +12,7 @@ export default {
         MoviesComp,
         TvComp,
         PopularMovies,
+        PopularTv,
     },
     data() {
         return {
@@ -19,13 +21,13 @@ export default {
     },
     created() {
         this.apiPopularMovies()
+        this.apiPopularTv()
     },
     methods : {
         apiPopularMovies() {
             let infoMovies;
             
             axios.get( `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&${store.ApiPath}`)
-            // axios.get( `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&${store.ApiPath}`)
                 .then( (res) => {
                 console.log(res.data.results) 
                 
@@ -46,6 +48,33 @@ export default {
                 })
                 store.arrayPopularMovies = infoMovies;
                 console.log(store.arrayPopularMovies);
+            });
+        },
+
+        apiPopularTv() {
+            let infoMovies;
+            
+            axios.get( `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&${store.ApiPath}`)
+                .then( (res) => {
+                console.log(res.data.results) 
+                
+                infoMovies = res.data.results;
+
+                infoMovies.forEach(element => {
+                    // modifico i codici lingua non riconosciuti dall'api per le bandiere
+                    this.changeFlag(element)
+
+                    // moddifico le date
+                    const newFormat = element.first_air_date.split('-');
+                    element.first_air_date = `${newFormat[2]}-${newFormat[1]}-${newFormat[0]}`;
+
+                    //Modifico i voti
+                    const newVote = Math.ceil((element.vote_average  * 5 / 10));
+                    element.vote_average = newVote;
+
+                })
+                store.arrayPopularTv = infoMovies;
+                console.log(store.arrayPopularTv);
             });
         },
 
@@ -79,6 +108,8 @@ export default {
         <TvComp v-if="store.arrayTv != '' "/>
 
         <PopularMovies/>
+
+        <PopularTv/>
 
     </main>
     
