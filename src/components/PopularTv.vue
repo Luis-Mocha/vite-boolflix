@@ -22,7 +22,7 @@ export default {
 
 <template>
 
-    <div id="PopularTvSection" class="main-section">
+    <div id="popularTvSection" class="main-section">
         <h2>
             Popular Tv Series
         </h2>

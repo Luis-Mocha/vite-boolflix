@@ -28,17 +28,17 @@ export default {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#tvSection">
                             Serie Tv
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#movieSection">
                             Film
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#popularMovieSection">
                             Nuovi e Popolari
                         </a>
                     </li>
