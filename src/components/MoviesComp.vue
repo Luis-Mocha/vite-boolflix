@@ -53,15 +53,16 @@ export default {
 
 <style lang="scss" scoped>
 @import "../style/main.scss";
-     span {
-        margin-right: 10px;
-        
-        i{
-            cursor: pointer;
-            &:hover {
-                color: red;
-            }
+
+    span {
+    margin-right: 10px;
+    
+    i{
+        cursor: pointer;
+        &:hover {
+            color: red;
         }
-     }
+    }
+    }
 
 </style>

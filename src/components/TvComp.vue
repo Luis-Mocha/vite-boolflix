@@ -27,9 +27,21 @@ export default {
             Tv series
         </h2>
 
+        <div class="mb-2">
+            <span>Hai cercato "{{ store.searchValue }}"</span>
+            <span>Risultati totali: {{ store.arrayTv.total_results }}</span>
+            <span>
+                <i class="fa-solid fa-angle-left" @click="$emit('emitPrevPage')"></i>
+            </span>
+            <span>Pagina {{store.arrayTv.page}} di {{store.arrayTv.total_pages}}</span>
+            <span>
+                <i class="fa-solid fa-angle-right" @click="$emit('emitNextPage')"></i>
+            </span>
+        </div>
+
         <div class="slider"> 
             <SingleTv
-            v-for="(elem, index) in store.arrayTv" :key="index"
+            v-for="(elem, index) in store.arrayTv.results" :key="index"
             :infoTv="elem"
             />
         </div>
@@ -40,5 +52,15 @@ export default {
 <style lang="scss" scoped>
 @import "../style/main.scss";
      
+    span {
+    margin-right: 10px;
+    
+    i{
+        cursor: pointer;
+        &:hover {
+            color: red;
+        }
+    }
+    }
 
 </style>

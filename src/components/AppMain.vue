@@ -97,11 +97,11 @@ export default {
             });
         },
 
-        // Funzione per cambiare pagina
-        nextPage() {
+        // Movies Funzione per cambiare pagina
+        nextPageMovie(parTipo, parArray) {
             let infoMovies;
             if (store.searchValue !== '') {
-                axios.get( `https://api.themoviedb.org/3/search/movie?${store.ApiPath}&query=${store.searchValue}&language=it_IT&page=${store.arrayMovies.page + 1}`)
+                axios.get( `https://api.themoviedb.org/3/search/${parTipo}?${store.ApiPath}&query=${store.searchValue}&language=it_IT&page=${parArray.page + 1}`)
                 // axios.get( `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&${store.ApiPath}`)
                     .then( (res) => {
                     console.log(res.data) 
@@ -131,10 +131,10 @@ export default {
             };
         },
 
-        prevPage() {
+        prevPageMovie(parTipo, parArray) {
             let infoMovies;
             if (store.searchValue !== '') {
-                axios.get( `https://api.themoviedb.org/3/search/movie?${store.ApiPath}&query=${store.searchValue}&language=it_IT&page=${store.arrayMovies.page - 1}`)
+                axios.get( `https://api.themoviedb.org/3/search/${parTipo}?${store.ApiPath}&query=${store.searchValue}&language=it_IT&page=${parArray.page - 1}`)
                 // axios.get( `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&${store.ApiPath}`)
                     .then( (res) => {
                     console.log(res.data) 
@@ -155,6 +155,73 @@ export default {
 
                     })
                     store.arrayMovies = infoMovies;
+                });
+
+            }
+            else {
+                console.log('Non hai scritto niente');
+                store.arrayMovies = []
+            };
+        },
+
+        // Tv series Funzione per cambiare pagina
+        nextPageTv(parTipo, parArray) {
+            let infoMovies;
+            if (store.searchValue !== '') {
+                axios.get( `https://api.themoviedb.org/3/search/${parTipo}?${store.ApiPath}&query=${store.searchValue}&language=it_IT&page=${parArray.page + 1}`)
+                // axios.get( `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&${store.ApiPath}`)
+                    .then( (res) => {
+                    console.log(res.data) 
+                    
+                    infoMovies = res.data;
+
+                    infoMovies.results.forEach(element => {
+                        // modifico i codici lingua non riconosciuti dall'api per le bandiere
+                        this.changeFlag(element)
+
+                        // moddifico le date
+                        const newFormat = element.first_air_date.split('-');
+                        element.first_air_date = `${newFormat[2]}-${newFormat[1]}-${newFormat[0]}`;
+
+                        //Modifico i voti
+                        const newVote = Math.ceil((element.vote_average  * 5 / 10));
+                        element.vote_average = newVote;
+
+                    })
+                    store.arrayTv = infoMovies;
+                });
+
+            }
+            else {
+                console.log('Non hai scritto niente');
+                store.arrayMovies = []
+            };
+        },
+
+        prevPageTv(parTipo, parArray) {
+            let infoMovies;
+            if (store.searchValue !== '') {
+                axios.get( `https://api.themoviedb.org/3/search/${parTipo}?${store.ApiPath}&query=${store.searchValue}&language=it_IT&page=${parArray.page - 1}`)
+                // axios.get( `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&${store.ApiPath}`)
+                    .then( (res) => {
+                    console.log(res.data) 
+                    
+                    infoMovies = res.data;
+
+                    infoMovies.results.forEach(element => {
+                        // modifico i codici lingua non riconosciuti dall'api per le bandiere
+                        this.changeFlag(element)
+
+                        // moddifico le date
+                        const newFormat = element.first_air_date.split('-');
+                        element.first_air_date = `${newFormat[2]}-${newFormat[1]}-${newFormat[0]}`;
+
+                        //Modifico i voti
+                        const newVote = Math.ceil((element.vote_average  * 5 / 10));
+                        element.vote_average = newVote;
+
+                    })
+                    store.arrayTv = infoMovies;
                 });
 
             }
@@ -175,11 +242,14 @@ export default {
     <main>
         
         <MoviesComp v-if="store.arrayMovies != '' " 
-        @emitNextPage="nextPage()"
-        @emitPrevPage="prevPage()"
+        @emitNextPage="nextPageMovie('movie', store.arrayMovies)"
+        @emitPrevPage="prevPageMovie('movie', store.arrayMovies)"
         />
 
-        <TvComp v-if="store.arrayTv != '' "/>
+        <TvComp v-if="store.arrayTv != '' "
+        @emitNextPage="nextPageTv('tv', store.arrayTv)"
+        @emitPrevPage="prevPageTv('tv', store.arrayTv)"
+        />
 
         <PopularMovies/>
 

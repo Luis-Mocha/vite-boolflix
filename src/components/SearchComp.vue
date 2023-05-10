@@ -49,11 +49,11 @@ export default {
             if (store.searchValue !== '') {
                 axios.get( `https://api.themoviedb.org/3/search/tv?${store.ApiPath}&query=${store.searchValue}&language=it_IT`)
                     .then( (res) => {
-                    console.log(res.data.results) 
+                    console.log(res.data) 
                     
-                    infoMovies = res.data.results;
+                    infoMovies = res.data;
 
-                    infoMovies.forEach(element => {
+                    infoMovies.results.forEach(element => {
                         // modifico i codici lingua non riconosciuti dall'api per le bandiere
                         this.changeFlag(element)
 
