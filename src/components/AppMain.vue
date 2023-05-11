@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import { store } from '../store';
+import SingleCard from './SingleCard.vue';
 import MoviesComp from './MoviesComp.vue';
 import TvComp from './TvComp.vue';
 import PopularMovies from './PopularMovies.vue';
@@ -13,6 +14,7 @@ export default {
         TvComp,
         PopularMovies,
         PopularTv,
+        SingleCard,
     },
     data() {
         return {
@@ -240,6 +242,58 @@ export default {
 <template>
 
     <main>
+
+        <div id="movieSectionProva" class="main-section" v-if="store.searchValue">
+            <h2>
+            Movies Prova
+            </h2>
+
+            <div class="info-pagina mb-2">
+                <span>Hai cercato "{{ store.searchValue }}"</span>
+                <span>Risultati totali: {{ store.arrayMovies.total_results }}</span>
+                <span>
+                    <i class="fa-solid fa-angle-left" @click="prevPageMovie('movie', store.arrayMovies)"></i>
+                </span>
+                <span>Pagina {{store.arrayMovies.page}} di {{store.arrayMovies.total_pages}}</span>
+                <span>
+                    <i class="fa-solid fa-angle-right" @click="nextPageMovie('movie', store.arrayMovies)"></i>
+                </span>
+            </div>
+            
+
+            <div class="slider"> 
+                <SingleCard
+                v-for="(elem, index) in store.arrayMovies.results" :key="index"
+                :info="elem"
+                />
+            </div>
+        </div>
+
+        <div id="tvSectionProva" class="main-section" v-if="store.searchValue">
+            <h2>
+            Tv Series Prova
+            </h2>
+
+            <div class="info-pagina mb-2">
+                <span>Hai cercato "{{ store.searchValue }}"</span>
+                <span>Risultati totali: {{ store.arrayTv.total_results }}</span>
+                <span>
+                    <i class="fa-solid fa-angle-left" @click="prevPageTv('tv', store.arrayTv)"></i>
+                </span>
+                <span>Pagina {{store.arrayTv.page}} di {{store.arrayTv.total_pages}}</span>
+                <span>
+                    <i class="fa-solid fa-angle-right" @click="nextPageTv('tv', store.arrayTv)"></i>
+                </span>
+            </div>
+            
+
+            <div class="slider"> 
+                <SingleCard
+                v-for="(elem, index) in store.arrayTv.results" :key="index"
+                :info="elem"
+                />
+            </div>
+        </div>
         
         <MoviesComp v-if="store.arrayMovies != '' " 
         @emitNextPage="nextPageMovie('movie', store.arrayMovies)"

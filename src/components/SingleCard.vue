@@ -1,0 +1,152 @@
+<script>
+
+export default {
+    name: "SingleCard",
+    props: ["info"],
+    data() {
+        return {
+            infoControl: false,
+        };
+    },
+    created() {
+    },
+    methods: {
+        openCloseInfo() {
+            if (this.infoControl === false) {
+                this.infoControl = true;
+            }
+            else {
+                this.infoControl = false;
+            }
+        },
+
+        getTitle() {
+            if (this.info.title) {
+                return this.info.title
+            }
+            else {
+                return this.info.name
+            }
+        },
+
+        getOriginalTitle() {
+            if (this.info.original_title) {
+                return this.info.original_title
+            }
+            else {
+                return this.info.original_name
+            }
+        },
+
+        getDate() {
+            if (this.info.release_date) {
+                const newFormat = this.info.release_date.split('-');
+                this.info.release_date = `${newFormat[2]}-${newFormat[1]}-${newFormat[0]}`;
+
+                return this.info.release_date
+            }
+            else {
+                const newFormat = this.info.first_air_date.split('-');
+                this.info.first_air_date = `${newFormat[2]}-${newFormat[1]}-${newFormat[0]}`;
+                
+                return this.info.first_air_date
+            }
+        },
+
+        changeFlag() {
+            if (this.info.original_language === 'en') {
+                this.info.original_language = 'gb'
+            }
+            else if (this.info.original_language === 'ko') {
+                this.info.original_language = 'kr'
+            }
+            else if (this.info.original_language === 'da') {
+                this.info.original_language = 'dk'
+            }
+            else if (this.info.original_language === 'ja') {
+                this.info.original_language = 'jp'
+            }
+            else {
+                return this.info.original_language
+            } 
+        },
+
+        changeVote() {
+            return Math.ceil((this.info.vote_average  * 5 / 10));
+        },
+
+    },
+}
+    
+</script>
+
+
+<template>
+    <div class="my-card col-6 col-md-4 col-lg-2" @mouseover="infoControl = true" @mouseleave="infoControl = false">
+
+        <div class="card-img" v-if="infoControl === false">
+            <img :src=" `https://image.tmdb.org/t/p/w342/${info.poster_path}` " :alt="info.title">
+        </div>
+        
+
+        <div class="card-info" :class="(infoControl === true) ? 'open' : '' ">
+
+            <!-- titolo -->
+            <h3 class="text-center">
+                {{getTitle()}}
+            </h3>
+
+            <!-- titolo originale -->
+            <!-- && info.title != info.original_title -->
+            <div v-if="infoControl === true">
+                <span>Titolo originale:</span>
+                <div class="ms-2">
+                    {{getOriginalTitle()}}
+                </div>
+            </div>
+
+            <!-- lingua -->
+            <div v-if="infoControl === true">
+                <span>Lingua Originale:</span>
+                <img :src="`https://flagcdn.com/24x18/${changeFlag()}.webp`" alt="Icona lingua originale" class="d-block mx-auto">
+            </div>
+
+            <!-- data -->
+            <div v-if="infoControl === true">
+                <span>Data Uscita</span>
+                <div class="ms-2">
+                    {{getDate()}}
+                </div>
+            </div>
+
+            <!-- voto -->
+            <div v-if="infoControl === true">
+                <span>Voto:</span>
+                <span>({{changeVote()}}/5)</span>
+                <br>
+                <i class="fa-star" v-for="n in 5" :class="(n <= changeVote()) ? 'fa-solid' : 'fa-regular'"></i>
+            </div>
+
+            
+        </div>
+
+        <button @click="openCloseInfo()">
+            <i class="fa-solid fa-chevron-up" v-if="infoControl === false"></i>
+            <i class="fa-solid fa-chevron-down" v-else></i>
+        </button>
+
+    </div>
+</template>
+
+<style lang="scss" scoped>
+
+@import "../style/main.scss";
+
+    .fa-star.fa-solid {
+        color: yellow;
+    }
+    .fa-star.fa-regular {
+        color: white;
+    }
+
+</style>

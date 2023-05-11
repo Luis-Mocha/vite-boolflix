@@ -27,7 +27,7 @@ export default {
             Tv series
         </h2>
 
-        <div class="mb-2">
+        <div class="info-pagina mb-2">
             <span>Hai cercato "{{ store.searchValue }}"</span>
             <span>Risultati totali: {{ store.arrayTv.total_results }}</span>
             <span>
@@ -51,16 +51,5 @@ export default {
 
 <style lang="scss" scoped>
 @import "../style/main.scss";
-     
-    span {
-    margin-right: 10px;
-    
-    i{
-        cursor: pointer;
-        &:hover {
-            color: red;
-        }
-    }
-    }
 
 </style>
