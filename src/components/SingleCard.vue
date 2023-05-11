@@ -51,6 +51,14 @@ export default {
             }
         },
 
+        getPoster(x) {
+            if (x) {
+             return `https://image.tmdb.org/t/p/w342/${x}`
+            } else {
+             return 'img/image-placeholder.png'
+            }
+        },
+
         changeFlag() {
             if (this.info.original_language === 'en') {
                 this.info.original_language = 'gb'
@@ -63,6 +71,9 @@ export default {
             }
             else if (this.info.original_language === 'ja') {
                 this.info.original_language = 'jp'
+            }
+            else if (this.info.original_language === 'cs') {
+                this.info.original_language = 'cz'
             }
             else {
                 return this.info.original_language
@@ -83,7 +94,9 @@ export default {
     <div class="my-card col-6 col-md-4 col-lg-2" @mouseover="infoControl = true" @mouseleave="infoControl = false"> <!--col-6 col-md-4 col-lg-2-->
 
         <div class="card-img" v-if="infoControl === false">
-            <img :src=" `https://image.tmdb.org/t/p/w342/${info.poster_path}` " :alt="info.title">
+            <!-- <img :src=" `https://image.tmdb.org/t/p/w342/${info.poster_path}` " :alt="info.title"> -->
+            <!-- <img :src="'img/image-placeholder.png'"> -->
+            <img :src="getPoster(info.poster_path)" alt="">
         </div>
         
 
@@ -106,7 +119,7 @@ export default {
             <!-- lingua -->
             <div v-if="infoControl === true">
                 <span>Lingua Originale:</span>
-                <img :src="`https://flagcdn.com/24x18/${changeFlag()}.webp`" alt="Icona lingua originale" class="d-block mx-auto">
+                <img :src="`https://flagcdn.com/24x18/${changeFlag()}.webp`" :alt="info.original_language" class="d-block mx-auto">
             </div>
 
             <!-- data -->
