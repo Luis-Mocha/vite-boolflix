@@ -97,13 +97,16 @@ export default {
     <div class="info-pagina mb-2">
         <span>Hai cercato "{{ store.searchValue }}"</span>
         <span>Risultati totali: {{ this.info.total_results }}</span>
-        <span>
-            <i class="fa-solid fa-angle-left" @click="prevPage()"></i>
-        </span>
-        <span>Pagina {{this.info.page}} di {{this.info.total_pages}}</span>
-        <span>
-            <i class="fa-solid fa-angle-right" @click="nextPage()"></i>
-        </span>
+        <div class="d-inline" v-if="info.total_results != 0">
+            <span>
+                <i class="fa-solid fa-angle-left" @click="prevPage()"></i>
+            </span>
+            <span>Pagina {{this.info.page}} di {{this.info.total_pages}}</span>
+            <span>
+                <i class="fa-solid fa-angle-right" @click="nextPage()"></i>
+            </span>
+        </div>
+        
     </div>
 
 </template>

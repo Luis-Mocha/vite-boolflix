@@ -170,7 +170,7 @@ export default {
 
             <PageInfo :info="store.arrayMovies" :infoTipo="'movie'"/>
 
-            <div class="slider"> 
+            <div class="slider" v-if="store.arrayMovies.results != 0"> 
                 <SingleCard
                 v-if="store.arrayMovies.results.length"
                 v-for="(elem, index) in store.arrayMovies.results" :key="index"
@@ -186,7 +186,7 @@ export default {
 
             <PageInfo :info="store.arrayTv" :infoTipo="'tv'"/>
 
-            <div class="slider"> 
+            <div class="slider" v-if="store.arrayTv.results != 0"> 
                 <SingleCard
                 v-for="(elem, index) in store.arrayTv.results" :key="index"
                 :info="elem"
