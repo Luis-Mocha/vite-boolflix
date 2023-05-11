@@ -170,20 +170,9 @@ export default {
 
             <PageInfo :info="store.arrayMovies" :infoTipo="'movie'"/>
 
-            <!-- <div class="info-pagina mb-2">
-                <span>Hai cercato "{{ store.searchValue }}"</span>
-                <span>Risultati totali: {{ store.arrayMovies.total_results }}</span>
-                <span>
-                    <i class="fa-solid fa-angle-left" @click="prevPageMovie('movie', store.arrayMovies)"></i>
-                </span>
-                <span>Pagina {{store.arrayMovies.page}} di {{store.arrayMovies.total_pages}}</span>
-                <span>
-                    <i class="fa-solid fa-angle-right" @click="nextPageMovie('movie', store.arrayMovies)"></i>
-                </span>
-            </div> -->
-
             <div class="slider"> 
                 <SingleCard
+                v-if="store.arrayMovies.results.length"
                 v-for="(elem, index) in store.arrayMovies.results" :key="index"
                 :info="elem"
                 />
@@ -195,17 +184,7 @@ export default {
             Tv Series
             </h2>
 
-            <div class="info-pagina mb-2">
-                <span>Hai cercato "{{ store.searchValue }}"</span>
-                <span>Risultati totali: {{ store.arrayTv.total_results }}</span>
-                <span>
-                    <i class="fa-solid fa-angle-left" @click="prevPageTv('tv', store.arrayTv)"></i>
-                </span>
-                <span>Pagina {{store.arrayTv.page}} di {{store.arrayTv.total_pages}}</span>
-                <span>
-                    <i class="fa-solid fa-angle-right" @click="nextPageTv('tv', store.arrayTv)"></i>
-                </span>
-            </div>
+            <PageInfo :info="store.arrayTv" :infoTipo="'tv'"/>
 
             <div class="slider"> 
                 <SingleCard
