@@ -5,16 +5,17 @@ export default {
     props: ["info"],
     data() {
         return {
-            infoControl: false,
+            openControl: false,
+            titleControl: false,
         };
     },
     methods: {
         openCloseInfo() {
-            if (this.infoControl === false) {
-                this.infoControl = true;
+            if (this.openControl === false) {
+                this.openControl = true;
             }
             else {
-                this.infoControl = false;
+                this.openControl = false;
             }
         },
 
@@ -91,16 +92,16 @@ export default {
 
 
 <template>
-    <div class="my-card col-6 col-md-4 col-lg-2" @mouseover="infoControl = true" @mouseleave="infoControl = false"> <!--col-6 col-md-4 col-lg-2-->
+    <div class="my-card col-6 col-md-4 col-lg-2" @mouseover="openControl = true" @mouseleave="openControl = false"> <!--col-6 col-md-4 col-lg-2-->
 
-        <div class="card-img" v-if="infoControl === false">
+        <div class="card-img" v-if="openControl === false">
             <!-- <img :src=" `https://image.tmdb.org/t/p/w342/${info.poster_path}` " :alt="info.title"> -->
             <!-- <img :src="'img/image-placeholder.png'"> -->
             <img :src="getPoster(info.poster_path)" alt="">
         </div>
         
 
-        <div class="card-info" :class="(infoControl === true) ? 'open' : '' ">
+        <div class="card-info" :class="(openControl === true) ? 'open' : '' ">
 
             <!-- titolo -->
             <h3 class="text-center">
@@ -109,7 +110,7 @@ export default {
 
             <!-- titolo originale -->
             <!-- && info.title != info.original_title -->
-            <div v-if="infoControl === true">
+            <div v-if="openControl === true ">
                 <span>Titolo originale:</span>
                 <div class="ms-2">
                     {{getOriginalTitle()}}
@@ -117,13 +118,13 @@ export default {
             </div>
 
             <!-- lingua -->
-            <div v-if="infoControl === true">
+            <div v-if="openControl === true">
                 <span>Lingua Originale:</span>
                 <img :src="`https://flagcdn.com/24x18/${changeFlag()}.webp`" :alt="info.original_language" class="d-block mx-auto">
             </div>
 
             <!-- data -->
-            <div v-if="infoControl === true">
+            <div v-if="openControl === true">
                 <span>Data Uscita</span>
                 <div class="ms-2">
                     {{getDate()}}
@@ -131,7 +132,7 @@ export default {
             </div>
 
             <!-- voto -->
-            <div v-if="infoControl === true">
+            <div v-if="openControl === true">
                 <span>Voto:</span>
                 <span>({{changeVote()}}/5)</span>
                 <br>
@@ -142,7 +143,7 @@ export default {
         </div>
 
         <button @click="openCloseInfo()">
-            <i class="fa-solid fa-chevron-up" v-if="infoControl === false"></i>
+            <i class="fa-solid fa-chevron-up" v-if="openControl === false"></i>
             <i class="fa-solid fa-chevron-down" v-else></i>
         </button>
 
