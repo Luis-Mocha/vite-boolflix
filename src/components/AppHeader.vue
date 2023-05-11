@@ -43,7 +43,7 @@ export default {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#myList">
                             La mia lista
                         </a>
                     </li>
