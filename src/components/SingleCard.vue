@@ -8,8 +8,6 @@ export default {
             infoControl: false,
         };
     },
-    created() {
-    },
     methods: {
         openCloseInfo() {
             if (this.infoControl === false) {
@@ -48,7 +46,7 @@ export default {
             else {
                 const newFormat = this.info.first_air_date.split('-');
                 this.info.first_air_date = `${newFormat[2]}-${newFormat[1]}-${newFormat[0]}`;
-                
+
                 return this.info.first_air_date
             }
         },
@@ -82,7 +80,7 @@ export default {
 
 
 <template>
-    <div class="my-card col-6 col-md-4 col-lg-2" @mouseover="infoControl = true" @mouseleave="infoControl = false">
+    <div class="my-card col-6 col-md-4 col-lg-2" @mouseover="infoControl = true" @mouseleave="infoControl = false"> <!--col-6 col-md-4 col-lg-2-->
 
         <div class="card-img" v-if="infoControl === false">
             <img :src=" `https://image.tmdb.org/t/p/w342/${info.poster_path}` " :alt="info.title">
