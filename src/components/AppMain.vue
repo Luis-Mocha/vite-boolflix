@@ -2,16 +2,12 @@
 import axios from 'axios';
 import { store } from '../store';
 import SingleCard from './SingleCard.vue';
-import MoviesComp from './MoviesComp.vue';
-import TvComp from './TvComp.vue';
 import PopularMovies from './PopularMovies.vue';
 import PopularTv from './PopularTv.vue';
 
 export default {
     name: 'AppMain',
     components: {
-        MoviesComp,
-        TvComp,
         PopularMovies,
         PopularTv,
         SingleCard,
@@ -243,9 +239,9 @@ export default {
 
     <main>
 
-        <div id="movieSectionProva" class="main-section" v-if="store.searchValue">
+        <div id="movieSection" class="main-section" v-if="store.searchValue">
             <h2>
-            Movies Prova
+            Movies
             </h2>
 
             <div class="info-pagina mb-2">
@@ -269,9 +265,9 @@ export default {
             </div>
         </div>
 
-        <div id="tvSectionProva" class="main-section" v-if="store.searchValue">
+        <div id="tvSection" class="main-section" v-if="store.searchValue">
             <h2>
-            Tv Series Prova
+            Tv Series
             </h2>
 
             <div class="info-pagina mb-2">
@@ -294,16 +290,6 @@ export default {
                 />
             </div>
         </div>
-        
-        <MoviesComp v-if="store.arrayMovies != '' " 
-        @emitNextPage="nextPageMovie('movie', store.arrayMovies)"
-        @emitPrevPage="prevPageMovie('movie', store.arrayMovies)"
-        />
-
-        <TvComp v-if="store.arrayTv != '' "
-        @emitNextPage="nextPageTv('tv', store.arrayTv)"
-        @emitPrevPage="prevPageTv('tv', store.arrayTv)"
-        />
 
         <PopularMovies/>
 
