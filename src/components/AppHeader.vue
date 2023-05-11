@@ -38,7 +38,7 @@ export default {
                         </a>
                     </li>
                     <li>
-                        <a href="#popularMovieSection">
+                        <a href="#popMovieSection">
                             Nuovi e Popolari
                         </a>
                     </li>
