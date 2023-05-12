@@ -61,7 +61,8 @@ html {
 .main-section {
     // border: 1px solid red;
     color: white;
-    margin-bottom: 50px;
+    width: 90%;
+    margin: 0 auto 50px;
 
     h2 {
         text-transform: uppercase;
@@ -127,10 +128,11 @@ html {
 // -- CARD SINGOLE --
 .my-card {
     // border: 1px solid white;
-    padding: 0 20px;
+    // padding: 0 20px;
     height: 100%;
-    // width: 230px;
+    width: 300px;
     cursor: pointer;
+    margin: auto;
     
     display: flex;
     flex-direction: column;
@@ -179,6 +181,7 @@ html {
 
     //quando le info sono aperte
     .card-info.open {
+        width: 100%;
         height: 90%;
         border: 1px solid red;
     }

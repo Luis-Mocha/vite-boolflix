@@ -92,7 +92,7 @@ export default {
 
 
 <template>
-    <div class="my-card col-6 col-md-4 col-lg-2" @mouseover="openControl = true" @mouseleave="openControl = false"> <!--col-6 col-md-4 col-lg-2-->
+    <div class="my-card" @mouseover="openControl = true" @mouseleave="openControl = false"> <!--col-6 col-md-4 col-lg-2-->
 
         <div class="card-img" v-if="openControl === false">
             <!-- <img :src=" `https://image.tmdb.org/t/p/w342/${info.poster_path}` " :alt="info.title"> -->

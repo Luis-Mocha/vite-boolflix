@@ -86,72 +86,16 @@ export default {
             };
         },
 
-        // Tv series Funzione per cambiare pagina
-        // nextPageTv(parTipo, parArray) {
-        //     let infoMovies;
-        //     if (store.searchValue !== '') {
-        //         axios.get( `https://api.themoviedb.org/3/search/${parTipo}?${store.ApiPath}&query=${store.searchValue}&language=it_IT&page=${parArray.page + 1}`)
-        //         // axios.get( `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&${store.ApiPath}`)
-        //             .then( (res) => {
-        //             console.log(res.data) 
-                    
-        //             infoMovies = res.data;
+        scrollHorizontal(e, elemHtml) {
 
-        //             infoMovies.results.forEach(element => {
-        //                 // modifico i codici lingua non riconosciuti dall'api per le bandiere
-        //                 this.changeFlag(element)
+            const slider = document.getElementById(elemHtml)
 
-        //                 // moddifico le date
-        //                 const newFormat = element.first_air_date.split('-');
-        //                 element.first_air_date = `${newFormat[2]}-${newFormat[1]}-${newFormat[0]}`;
-
-        //                 //Modifico i voti
-        //                 const newVote = Math.ceil((element.vote_average  * 5 / 10));
-        //                 element.vote_average = newVote;
-
-        //             })
-        //             store.arrayTv = infoMovies;
-        //         });
-
-        //     }
-        //     else {
-        //         console.log('Non hai scritto niente');
-        //         store.arrayMovies = []
-        //     };
-        // },
-
-        // prevPageTv(parTipo, parArray) {
-        //     let infoMovies;
-        //     if (store.searchValue !== '') {
-        //         axios.get( `https://api.themoviedb.org/3/search/${parTipo}?${store.ApiPath}&query=${store.searchValue}&language=it_IT&page=${parArray.page - 1}`)
-        //         // axios.get( `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&${store.ApiPath}`)
-        //             .then( (res) => {
-        //             console.log(res.data) 
-                    
-        //             infoMovies = res.data;
-
-        //             infoMovies.results.forEach(element => {
-        //                 // modifico i codici lingua non riconosciuti dall'api per le bandiere
-        //                 this.changeFlag(element)
-
-        //                 // moddifico le date
-        //                 const newFormat = element.first_air_date.split('-');
-        //                 element.first_air_date = `${newFormat[2]}-${newFormat[1]}-${newFormat[0]}`;
-
-        //                 //Modifico i voti
-        //                 const newVote = Math.ceil((element.vote_average  * 5 / 10));
-        //                 element.vote_average = newVote;
-
-        //             })
-        //             store.arrayTv = infoMovies;
-        //         });
-
-        //     }
-        //     else {
-        //         console.log('Non hai scritto niente');
-        //         store.arrayMovies = []
-        //     };
-        // },
+            if (e.deltaY > 0) {
+                slider.scrollLeft += 100
+            } else {
+                slider.scrollLeft -= 100
+            }
+        },
 
     }
 }
@@ -170,7 +114,7 @@ export default {
 
             <PageInfo :info="store.arrayMovies" :infoTipo="'movie'"/>
 
-            <div class="slider" v-if="store.arrayMovies.results != 0"> 
+            <div id="slider-film" @wheel.prevent="scrollHorizontal($event, 'slider-film')" class="slider row flex-nowrap overflow-x-hidden" v-if="store.arrayMovies.results != 0"> 
                 <SingleCard
                 v-if="store.arrayMovies.results.length"
                 v-for="(elem, index) in store.arrayMovies.results" :key="index"
@@ -186,7 +130,7 @@ export default {
 
             <PageInfo :info="store.arrayTv" :infoTipo="'tv'"/>
 
-            <div class="slider" v-if="store.arrayTv.results != 0"> 
+            <div id="slider-tv" @wheel.prevent="scrollHorizontal($event, 'slider-tv')" class="slider row flex-nowrap overflow-x-hidden" v-if="store.arrayTv.results != 0"> 
                 <SingleCard
                 v-for="(elem, index) in store.arrayTv.results" :key="index"
                 :info="elem"
@@ -199,7 +143,7 @@ export default {
                 Popular Movies
             </h2>
 
-            <div class="slider"> 
+            <div id="slider-popfilm" @wheel.prevent="scrollHorizontal($event, 'slider-popfilm')" class="slider row flex-nowrap overflow-x-hidden"> 
                 <SingleCard
                 v-for="(elem, index) in store.arrayPopularMovies.results" :key="index"
                 :info="elem"
@@ -212,7 +156,8 @@ export default {
                 Popular TvSeries
             </h2>
 
-            <div class="slider"> 
+            
+            <div id="slider-poptv" @wheel.prevent="scrollHorizontal($event, 'slider-poptv')" class="slider row flex-nowrap overflow-x-hidden position-relative"> 
                 <SingleCard
                 v-for="(elem, index) in store.arrayPopularTv.results" :key="index"
                 :info="elem"
@@ -230,6 +175,6 @@ export default {
     main {
         background-color: black;
         min-height: calc(100vh - 100px);
-        padding: 20px;
+        padding: 20px 0;
     }
 </style>
