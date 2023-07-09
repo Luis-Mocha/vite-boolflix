@@ -56,7 +56,7 @@ export default {
             if (x) {
              return `https://image.tmdb.org/t/p/w342/${x}`
             } else {
-             return 'img/image-placeholder.png'
+             return '/img/image-placeholder.png'
             }
         },
 
